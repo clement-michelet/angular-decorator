@@ -13,8 +13,9 @@ const _getObjectDeepValueByPath = (subject: any, path: string): any => {
 };
 
 export interface MovieMicrodata {
-    "title": string,
+    "name": string,
     "url": string,
+    "image": string,
     "director": PersonMicrodata
 }
 
@@ -31,17 +32,14 @@ export const MovieMicrodata: MovieMicrodataDecorator = <MovieMicrodataDecorator>
             "microdata",
             {
                 get: function () {
-                    const title = _getObjectDeepValueByPath(this, microdata.title);
-                    const url = _getObjectDeepValueByPath(this, microdata.url);
-                    const director = {
-                        givenName: _getObjectDeepValueByPath(this, microdata.director.givenName),
-                        familyName: _getObjectDeepValueByPath(this, microdata.director.familyName)
-                    };
-
                     return {
-                        "title": title,
-                        "url": url,
-                        "director": director
+                        "name": _getObjectDeepValueByPath(this, microdata.name),
+                        "url": _getObjectDeepValueByPath(this, microdata.url),
+                        "image": _getObjectDeepValueByPath(this, microdata.image),
+                        "director": {
+                            givenName: _getObjectDeepValueByPath(this, microdata.director.givenName),
+                            familyName: _getObjectDeepValueByPath(this, microdata.director.familyName)
+                        }
                     };
                 }
             }

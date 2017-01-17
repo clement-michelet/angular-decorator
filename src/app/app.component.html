@@ -10,12 +10,15 @@
         <dd *ngIf="movie.website"><a [href]="movie.website">{{movie.website}}</a></dd>
     </dl>
 
-    <meta itemprop="title" [content]="movie.microdata.title"/>
+    <meta itemprop="name" [content]="movie.microdata.name"/>
     <meta itemprop="url" [content]="movie.microdata.url"/>
-
+    <meta itemprop="image" [content]="movie.microdata.image"/>
 
     <div itemprop="director" itemscope itemtype="http://schema.org/Person" *ngIf="movie.microdata">
         <meta itemprop="givenName" [content]="movie.microdata.director.givenName"/>
         <meta itemprop="familyName" [content]="movie.microdata.director.familyName"/>
+        <meta itemprop="name"
+              [content]="movie.microdata.director.givenName + ' ' + movie.microdata.director.familyName"
+        />
     </div>
 </section>
