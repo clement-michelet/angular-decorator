@@ -1,13 +1,21 @@
 <h1>Movies</h1>
 
-<section *ngFor="let movie of movies">
+<section *ngFor="let movie of movies" itemscope itemtype="http://schema.org/Movie">
     <header>{{ movie.title }}</header>
     <dl>
         <dt>Director:</dt>
         <dd>{{movie.director.firstName}} {{movie.director.lastName}}</dd>
 
         <dt *ngIf="movie.website">Website:</dt>
-        <dd *ngIf="movie.website"><a href="{{movie.website}}">{{movie.website}}</a></dd>
+        <dd *ngIf="movie.website"><a [href]="movie.website">{{movie.website}}</a></dd>
     </dl>
-</section>
 
+    <meta itemprop="title" [content]="movie.microdata.title"/>
+    <meta itemprop="url" [content]="movie.microdata.url"/>
+
+
+    <div itemprop="director" itemscope itemtype="http://schema.org/Person" *ngIf="movie.microdata">
+        <meta itemprop="givenName" [content]="movie.microdata.director.givenName"/>
+        <meta itemprop="familyName" [content]="movie.microdata.director.familyName"/>
+    </div>
+</section>
